@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Tank.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/Controller.h"
+#include "Tank.h"
 #include "TankPlayerController.generated.h"
 
 /**
