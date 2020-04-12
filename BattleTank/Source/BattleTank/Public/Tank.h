@@ -40,15 +40,18 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:	
-	UPROPERTY(EditAnywhere, Category = FiringOptions)
+	UPROPERTY(EditDefaultsOnly, Category = FiringOptions)
 	float ProjectileSpeed = 120000.f;				// TODO Find reasonable default
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	float ReloadTimeInSeconds = 12;
 
 	UTankBarrel* Barrel = nullptr;
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-
+	double LastFireTime;
 };
