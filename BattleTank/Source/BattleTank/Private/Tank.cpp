@@ -13,9 +13,13 @@ ATank::ATank()
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
 }
 
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
-	TankAimingComponent->SetBarrelReference(BarrelToSet, TurretToSet);
+	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
+void ATank::SetTurretReference(UTankTurret* TurretToSet)
+{;
+	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
 
