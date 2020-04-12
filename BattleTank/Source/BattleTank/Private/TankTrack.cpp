@@ -5,10 +5,6 @@
 
 void UTankTrack::SetThrottle(float Throttle)
 {
-	auto Name = GetName();
-	
-	UE_LOG(LogTemp, Warning, TEXT("%s Throttle set to : %f"), *Name, Throttle)
-
 	// TODO Add clamp so the player cannot change the top speed by changing input parameters
 	auto ForceApplied = GetForwardVector() * Throttle * TrackMaxForce;
 	auto ForceLocation = GetComponentLocation();
