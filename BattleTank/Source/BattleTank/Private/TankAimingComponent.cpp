@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "TankBarrel.h"
+#include "TankTurret.h"
 #include "GameFramework/Actor.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/SceneComponent.h"
@@ -18,9 +19,10 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
 	Barrel = BarrelToSet;
+	Turret = TurretToSet;
 }
 
 // Called when the game starts
@@ -38,12 +40,13 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	// TODO Should this really tick?
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float ProjectileSpeed)
 {
 	if (!Barrel) { UE_LOG(LogTemp, Error, TEXT("No Barrel found!")) return; }
+	if (!Turret) { UE_LOG(LogTemp, Error, TEXT("No Turret found!")) return; }
 
 	FVector OutProjectileVelocity(0);
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -59,7 +62,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float ProjectileSpeed)
 		false,
 		50,
 		0,
-		ESuggestProjVelocityTraceOption::DoNotTrace,
+		ESuggestProjVelocityTraceOption::DoNotTrace,	// Parameter must be present to prevent bug (UE 4.24.2)
 		FCollisionResponseParams::DefaultResponseParam,
 		ActorsToIgnore,
 		false
@@ -84,7 +87,8 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotation;
 
-	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator : %s"), *AimAsRotator.ToString());
+	// UE_LOG(LogTemp, Warning, TEXT("AimAsRotator : %s"), *AimAsRotator.ToString());
 
-	Barrel->Elevate(5.f);
+	Barrel->Elevate(DeltaRotator.Pitch);
+	Turret->Rotate(DeltaRotator.Yaw);
 }

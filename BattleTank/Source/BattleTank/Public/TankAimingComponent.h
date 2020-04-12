@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TankBarrel.h"
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
 
+class UTankBarrel;
+class UTankTurret;
 
 // Holds properties and methods for a tank barrel
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
@@ -23,10 +24,10 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
+	void SetBarrelReference(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;	// TODO Check if needed!
 
 	void AimAt(FVector HitLocation, float ProjectileSpeed);
 
@@ -34,5 +35,5 @@ public:
 
 private:
 	UTankBarrel* Barrel = nullptr;
-
+	UTankTurret* Turret = nullptr;
 };
