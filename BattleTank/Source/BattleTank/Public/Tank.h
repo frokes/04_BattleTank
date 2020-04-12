@@ -27,6 +27,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
+	UFUNCTION(BlueprintCallable, Category = Actions)
+	void Fire();
+
 	UPROPERTY(EditAnywhere, Category = FiringOptions)
 	float ProjectileSpeed = 120000.f;				// TODO Find reasonable default
 
