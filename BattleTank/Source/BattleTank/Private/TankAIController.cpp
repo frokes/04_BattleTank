@@ -20,13 +20,15 @@ void ATankAIController::Tick(float DeltaTime)
 
 	ControlledTank = Cast<ATank>(GetPawn());
 	PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-
+	
 	if (PlayerTank)
 	{
+		// UE_LOG(LogTemp, Warning, TEXT("I am an AI!"));
 		// TODO Move towards the player
+		MoveToActor(PlayerTank, AcceptanceRadius); // TODO Check radius is in cm
 
 		ControlledTank->AimAt(PlayerTank->GetActorLocation() + FVector(0.f, 0.f, 60.f));
 
-		ControlledTank->Fire();
+		//ControlledTank->Fire();
 	}
 }
