@@ -16,13 +16,13 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, Category = Action)
+	UFUNCTION(BlueprintCallable, Category = "Action")
 	void IntentMoveForward(float Throw);
 	
-	UFUNCTION(BlueprintCallable, Category = Action)
+	UFUNCTION(BlueprintCallable, Category = "Action")
 	void IntentTurnRight(float Throw);
 
-	UFUNCTION(BlueprintCallable, Category = Action)
+	UFUNCTION(BlueprintCallable, Category = "Action")
 	void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 
 private:
